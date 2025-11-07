@@ -55,7 +55,7 @@ add_executable(moveit_setup_assistant::moveit_setup_assistant IMPORTED)
 
 set_target_properties(moveit_setup_assistant::moveit_setup_assistant PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB"
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/moveit_setup_assistant;/usr/include/x86_64-linux-gnu/qt5/;/usr/include/x86_64-linux-gnu/qt5/QtCore;/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++;/usr/include/x86_64-linux-gnu/qt5/QtWidgets;/usr/include/x86_64-linux-gnu/qt5/QtGui;${_IMPORT_PREFIX}/include/moveit_setup_assistant"
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/moveit_setup_assistant;/usr/include/aarch64-linux-gnu/qt5/;/usr/include/aarch64-linux-gnu/qt5/QtCore;/usr/lib/aarch64-linux-gnu/qt5//mkspecs/linux-g++;/usr/include/aarch64-linux-gnu/qt5/QtWidgets;/usr/include/aarch64-linux-gnu/qt5/QtGui;${_IMPORT_PREFIX}/include/moveit_setup_assistant"
 )
 
 # Create imported target moveit_setup_assistant::moveit_setup_assistant_updater
@@ -63,7 +63,7 @@ add_executable(moveit_setup_assistant::moveit_setup_assistant_updater IMPORTED)
 
 set_target_properties(moveit_setup_assistant::moveit_setup_assistant_updater PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB"
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/moveit_setup_assistant;/usr/include/x86_64-linux-gnu/qt5/;/usr/include/x86_64-linux-gnu/qt5/QtCore;/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++;/usr/include/x86_64-linux-gnu/qt5/QtWidgets;/usr/include/x86_64-linux-gnu/qt5/QtGui;${_IMPORT_PREFIX}/include/moveit_setup_assistant"
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/moveit_setup_assistant;/usr/include/aarch64-linux-gnu/qt5/;/usr/include/aarch64-linux-gnu/qt5/QtCore;/usr/lib/aarch64-linux-gnu/qt5//mkspecs/linux-g++;/usr/include/aarch64-linux-gnu/qt5/QtWidgets;/usr/include/aarch64-linux-gnu/qt5/QtGui;${_IMPORT_PREFIX}/include/moveit_setup_assistant"
 )
 
 # Load information for each installed configuration.

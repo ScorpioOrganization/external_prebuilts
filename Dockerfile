@@ -29,6 +29,6 @@ RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON_MODULE=OFF -DBUILD_EXAMPL
 RUN cmake --build . -- --jobs $(nproc) || sed -i '41d' /root/Open3D/build/filament/src/ext_filament/libs/image/src/ImageSampler.cpp
 RUN cmake --build . -- --jobs $(nproc)
 
-FROM ros:humble-ros-base-jammy
+FROM scratch
 
 COPY --from=build /root/Open3D /root/Open3D

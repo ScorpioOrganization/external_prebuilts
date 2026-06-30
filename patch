@@ -1,5 +1,5 @@
 diff --git a/cpp/open3d/visualization/rendering/filament/FilamentRenderToBuffer.cpp b/cpp/open3d/visualization/rendering/filament/FilamentRenderToBuffer.cpp
-index cb55257..9733ab0 100644
+index cb55257..b5f0836 100644
 --- a/cpp/open3d/visualization/rendering/filament/FilamentRenderToBuffer.cpp
 +++ b/cpp/open3d/visualization/rendering/filament/FilamentRenderToBuffer.cpp
 @@ -161,10 +161,6 @@ void FilamentRenderToBuffer::ReadPixelsCallback(void*, size_t, void* user) {
@@ -13,3 +13,18 @@ index cb55257..9733ab0 100644
      self->frame_done_ = true;
      delete params;
  }
+@@ -194,6 +190,14 @@ void FilamentRenderToBuffer::Render() {
+                               std::move(pd));
+ 
+         renderer_->endFrame();
++
++        // Force the readback to complete now so ReadPixelsCallback runs and
++        // fills the buffer before Render() returns. Required when the buffer
++        // renderer is reused across frames: FilamentRenderer::BeginFrame only
++        // flushes on the first frame (it clears buffer_renderers_), so without
++        // this the deferred readPixels callback lands several draws later and
++        // callers read a stale/empty buffer.
++        engine_.flushAndWait();
+     }
+     scene_->HideRefractedMaterials(false);
+ 

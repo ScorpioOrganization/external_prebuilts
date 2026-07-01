@@ -2,7 +2,6 @@ FROM ros:humble-ros-base-jammy AS build
 
 WORKDIR /root
 RUN git clone https://github.com/isl-org/Open3D.git --depth 1 --branch v0.18.0
-WORKDIR /root/Open3D/build
 
 # Install dependencies for Open3D
 RUN apt-get update && apt-get install -y \
@@ -24,10 +23,15 @@ RUN apt-get update && apt-get install -y \
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
+# Apply patch
+WORKDIR /root/Open3D
+COPY patch .
+RUN git apply patch
+
 # Build Open3D
+WORKDIR /root/Open3D/build
 RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON_MODULE=OFF -DBUILD_EXAMPLES=OFF -DBUILD_WEBRTC=OFF
-RUN cmake --build . -- --jobs $(nproc) || sed -i '41d' /root/Open3D/build/filament/src/ext_filament/libs/image/src/ImageSampler.cpp
-RUN cmake --build . -- --jobs $(nproc)
+RUN cmake --build . -- --jobs $(nproc) || (sed -i '41d' /root/Open3D/build/filament/src/ext_filament/libs/image/src/ImageSampler.cpp && cmake --build . -- --jobs $(nproc))
 
 FROM scratch
 
